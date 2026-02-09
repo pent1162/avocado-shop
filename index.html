@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>農民直送酪梨 - 新鮮現採直送到家</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🥑 農民直送</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">首頁</a></li>
+                    <li><a href="#products">產品</a></li>
+                    <li><a href="#about">關於我們</a></li>
+                    <li><a href="#contact">聯絡我們</a></li>
+                </ul>
+                <div class="cart-icon" onclick="toggleCart()">
+                    🛒 <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>來自農民的新鮮酪梨</h2>
+                <p>台灣在地小農直送，新鮮現採，營養滿分</p>
+                <a href="#products" class="btn-primary">立即選購</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2 class="section-title">精選酪梨商品</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">關於我們</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>🌱 堅持自然種植</h3>
+                    <p>我們與台灣各地小農合作，堅持自然農法種植，不使用化學農藥，讓每一顆酪梨都健康營養。</p>
+
+                    <h3>🚚 產地直送</h3>
+                    <p>採收後立即包裝配送，減少中間流程，確保您收到的酪梨都是最新鮮的狀態。</p>
+
+                    <h3>💚 支持在地農業</h3>
+                    <p>直接向農民購買，讓辛勤耕作的農民獲得合理報酬，同時您也能享受最優惠的價格。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">聯絡我們</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <strong>📞 電話：</strong>
+                        <p>0912-345-678</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>📧 Email：</strong>
+                        <p>avocado@farmer.tw</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>⏰ 營業時間：</strong>
+                        <p>週一至週六 9:00 - 18:00</p>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="您的姓名" required>
+                    <input type="email" placeholder="您的Email" required>
+                    <textarea placeholder="您的訊息" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">送出訊息</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>購物車</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">購物車是空的</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>總計：</strong>
+                <span id="cartTotal">NT$ 0</span>
+            </div>
+            <button class="btn-primary btn-block" onclick="checkout()">前往結帳</button>
+        </div>
+    </div>
+
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>結帳資訊</h3>
+                <button class="close-modal" onclick="closeCheckout()">✕</button>
+            </div>
+            <form id="checkoutForm" class="checkout-form">
+                <div class="form-group">
+                    <label>姓名 *</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label>電話 *</label>
+                    <input type="tel" id="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>配送地址 *</label>
+                    <textarea id="customerAddress" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>備註</label>
+                    <textarea id="orderNote" rows="2"></textarea>
+                </div>
+                <div class="order-summary">
+                    <h4>訂單摘要</h4>
+                    <div id="checkoutItems"></div>
+                    <div class="summary-total">
+                        <strong>總計：</strong>
+                        <span id="checkoutTotal">NT$ 0</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary btn-block">確認訂購</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 農民直送酪梨. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
